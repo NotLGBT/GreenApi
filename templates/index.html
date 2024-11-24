@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <input type="text" placeholder="idInstance" id="idInstance">
+            <input type="text" placeholder="ApiTokenInstance" id="apiTokenInstance">
+            <button onclick="SendRequest(this.id)" id="getSettings">getSettings</button>
+            <button onclick="SendRequest(this.id)" id="getStateInstance">getStateInstance</button>
+            <input type="text" placeholder="ChatId" id="ChatId_Message">
+            <input type="text" placeholder="Message" id="messageText">
+            <button onclick="SendRequest(this.id)" id="sendMessage">sendMessage</button>
+            <input type="text" placeholder="ChatId" id="ChatId_FileByUrl">
+            <input type="text" placeholder="File URL" id="fileUrl">
+            <button onclick="SendRequest(this.id)" id="sendFileByUrl">sendFileByUrl</button>
+        </div>
+        <div class="right-panel">
+            <pre id="response">Omaem:</pre>
+        </div>
+    <script>
+        async function SendRequest(id) {
+        const apiUrl = "https://7103.api.greenapi.com"
+
+        let payload = {};
+        let method = "GET";
+
+        switch (id) {
+            case "getSettings":
+            case "getStateInstance":
+                method = "GET";
+                break;
+            case "sendMessage":
+                payload = {
+                    chatId: document.getElementById('ChatId_Message').value,
+                    message: document.getElementById('messageText').value,
+                };
+                method = "POST";
+                break;
+            case "sendFileByUrl":
+                payload = {
+                    chatId: document.getElementById('ChatId_FileByUrl').value,
+                    urlFile: document.getElementById('fileUrl').value,
+                    fileName: document.getElementById('fileUrl').value.split('/').pop(),
+                    caption: "----",
+                };
+                method = "POST";
+                break;
+            default:
+                alert("Invalid Request");
+                return;
+        }
+        try {
+            const response = await fetch("/api/request", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    currentRequest: id,
+                    idInstance,
+                    apiTokenInstance,
+                    apiUrl,
+                    payload,
+                    method,
+                }),
+            });
+            const result = await response.json();
+            document.getElementById("response").textContent = JSON.stringify(result, null, 2);
+        } catch (error) {
+            console.error("Error:", error);
+            document.getElementById("response").textContent = "Error occurred while processing the request.";
+        }
+    }
+    </script>
+</body>
+</html>

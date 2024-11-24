@@ -1,0 +1,26 @@
+[
+    {
+        "idMessage": "BAE5FB0E33C6A2E7"
+    },
+    {
+        "idMessage": "BAE51667C6DA9961"
+    },
+    {
+        "idMessage": "BAE5531539DEE854"
+    },
+    {
+        "idMessage": "BAE5CEA9F9912224"
+    },
+    {
+        "idMessage": "BAE5E3C8442A6A3A"
+    },
+    {
+        "idMessage": "BAE51BCD24B8CFCD"
+    },
+    {
+        "statusCode": 400,
+        "timestamp": "2024-11-24T18:19:52.927Z",
+        "path": "/waInstance7103959976/sendMessage/050789fa1b194a019c0e065fcf89fb1f13f029caccc74972ac",
+        "message": "Validation failed. Details: 'chatId' must be one of the next formats: 'phone_number@c.us' or 'group_id@g.us'"
+    }
+]
