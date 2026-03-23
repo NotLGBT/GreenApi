@@ -1,0 +1,10 @@
+steps:
+  - name: deploy
+    image: python:3.11-slim
+    commands:
+      - python app.py
+
+depends_on:
+  - lint
+  - build
+  - test
