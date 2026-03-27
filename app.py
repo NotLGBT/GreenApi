@@ -1,6 +1,8 @@
-from flask import Flask, current_app, render_template, request, jsonify, redirect, session, url_for
-import requests, os
-import json, sql_script
+import json
+import os
+
+import requests
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 
 ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)

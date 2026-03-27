@@ -1,5 +1,5 @@
 import json
-from mysql.connector import connect, Error, errorcode
+from mysql.connector import Error, connect
 
 JSON_FILE = "./data.json"
 
