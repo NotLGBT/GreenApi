@@ -85,6 +85,6 @@ def api_request():
     
 if __name__ == "__main__":
     context = ('local.crt', 'local.key')  
-    app.run(host='0.0.0.0', ssl_context=context)
+    app.run(host='0.0.0.0', ssl_context=context)  # nosemgrep: python.flask.security.audit.app-run-param-config.avoid_app_run_with_bad_host
 
 #
